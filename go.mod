@@ -1,4 +1,4 @@
-module github.com/rock16/hngi8_stage2_backendtask/v0
+module github.com/rock16/hngi8_stage2_backendtask
 
 go 1.15
 

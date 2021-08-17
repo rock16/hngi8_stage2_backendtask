@@ -2,17 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	//port := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 
-	//if port == "" {
-	//log.Fatal("$PORT must be set")
-	//}
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
 
 	router := gin.Default()
 	router.Static("/", "./template")
@@ -24,5 +26,5 @@ func main() {
 		c.String(http.StatusOK, fmt.Sprintf("Thank you for getting in touch with me fields name= %s and email= %s.", name, email))
 	})
 
-	router.Run(":8080")
+	router.Run(":" + port)
 }
