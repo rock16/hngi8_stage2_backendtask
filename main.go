@@ -1,33 +1,28 @@
 package main
 
 import (
-	"html/template"
-	"log"
+	"fmt"
 	"net/http"
-	"path/filepath"
-	"sync"
+
+	"github.com/gin-gonic/gin"
 )
 
-// templ represents a single template
-type templateHandler struct {
-	once     sync.Once
-	filename string
-	templ    *template.Template
-}
-
-// ServerHTTP handles the HTTP request.
-func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	t.once.Do(func() {
-		t.templ = template.Must(template.ParseFiles(filepath.Join("template", t.filename)))
-	})
-	t.templ.Execute(w, nil)
-}
-
 func main() {
-	// root
-	http.Handle("/", &templateHandler{filename: "index.html"})
-	// start the web server
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal("ListenAndServe:", err)
-	}
+	//port := os.Getenv("PORT")
+
+	//if port == "" {
+	//log.Fatal("$PORT must be set")
+	//}
+
+	router := gin.Default()
+	router.Static("/", "./template")
+
+	router.POST("/upload", func(c *gin.Context) {
+		name := c.PostForm("name")
+		email := c.PostForm("email")
+
+		c.String(http.StatusOK, fmt.Sprintf("Thank you for getting in touch with me fields name= %s and email= %s.", name, email))
+	})
+
+	router.Run(":8080")
 }
