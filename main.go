@@ -20,7 +20,7 @@ type form struct {
 }
 
 const (
-	dbname = "hngi8db"
+	dbname = "heroku_01cd8f795453e84"
 )
 
 func dbConnection() (*sql.DB, error) {
