@@ -70,7 +70,7 @@ func dbConnection() (*sql.DB, error) {
 
 func createTable(db *sql.DB) error {
 	query := `CREATE TABLE IF NOT EXISTS contact_me2(email text, subject text, message text)`
-	ctx, cancelfunc := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancelfunc := context.WithTimeout(context.Background(), 6*time.Second)
 	defer cancelfunc()
 
 	res, err := db.ExecContext(ctx, query)
