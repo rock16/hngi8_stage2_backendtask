@@ -132,7 +132,7 @@ func main() {
 
 		if err != nil {
 			log.Printf("error: %s when opening DB\n", err)
-			c.String(http.StatusInternalServerError, fmt.Sprintf("Internal server error"))
+			c.String(http.StatusInternalServerError, fmt.Sprintf("Internal server error1"))
 		}
 		defer db.Close()
 
@@ -140,14 +140,14 @@ func main() {
 		err = createTable(db)
 		if err != nil {
 			log.Printf("Create product table failed with error %s", err)
-			c.String(http.StatusInternalServerError, fmt.Sprintf("Internal server error"))
+			c.String(http.StatusInternalServerError, fmt.Sprintf("Internal server error2"))
 			return
 		}
 
 		err = insert(db, f)
 		if err != nil {
 			log.Printf("Insert product failed with error %s", err)
-			c.String(http.StatusInternalServerError, fmt.Sprintf("Internal server error"))
+			c.String(http.StatusInternalServerError, fmt.Sprintf("Internal server error3"))
 			return
 		}
 
