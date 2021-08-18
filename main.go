@@ -31,7 +31,7 @@ func dbConnection() (*sql.DB, error) {
 	}
 	//defer db.Close()
 
-	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancelfunc := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancelfunc()
 	res, err := db.ExecContext(ctx, "CREATE DATABASE IF NOT EXISTS "+dbname)
 	if err != nil {
@@ -70,7 +70,7 @@ func dbConnection() (*sql.DB, error) {
 
 func createTable(db *sql.DB) error {
 	query := `CREATE TABLE IF NOT EXISTS contact_me2(email text, subject text, message text)`
-	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancelfunc := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancelfunc()
 
 	res, err := db.ExecContext(ctx, query)
@@ -133,6 +133,7 @@ func main() {
 		if err != nil {
 			log.Printf("error: %s when opening DB\n", err)
 			c.String(http.StatusInternalServerError, fmt.Sprintf("Internal server error1"))
+			return
 		}
 		defer db.Close()
 
@@ -162,7 +163,9 @@ func dsn() string {
 
 	if url == "" {
 		log.Fatal("$DATABASE_URL is not set")
-		return ""
+		return "bc63f89166fdb5:135bdeb8@tcp(us-cdbr-east-04.cleardb.com)/heroku_01cd8f795453e84"
 	}
+
+	url = "bc63f89166fdb5:135bdeb8@tcp(us-cdbr-east-04.cleardb.com)/heroku_01cd8f795453e84"
 	return url
 }
