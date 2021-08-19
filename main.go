@@ -166,6 +166,6 @@ func dsn() string {
 		return "bc63f89166fdb5:135bdeb8@tcp(us-cdbr-east-04.cleardb.com)/heroku_01cd8f795453e84"
 	}
 
-	url = "bc63f89166fdb5:135bdeb8@tcp(us-cdbr-east-04.cleardb.com)/heroku_01cd8f795453e84"
+	//url = "bc63f89166fdb5:135bdeb8@tcp(us-cdbr-east-04.cleardb.com)/heroku_01cd8f795453e84"
 	return url
 }
